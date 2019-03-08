@@ -9,11 +9,27 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import axios from 'axios';
+import { takeEvery, put } from 'redux-saga/effects'
 
 // Create the rootSaga generator function
 function* rootSaga() {
-
+    yield takeEvery('GET_PORTFOLIO', getPortInfo)
 }
+
+function* getPortInfo(action) {
+    try {
+      const portInfo = yield axios({
+        method: 'GET',
+        url: '/api/profile/port'
+      })
+      yield put({type: 'SET_PROJECTS', payload: portInfo.data})
+    }
+    catch (err){
+      console.log('in getPortInfo (get)', err)
+    }
+  }
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
