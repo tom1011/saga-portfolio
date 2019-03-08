@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ProjectItem from '../ProjectItem/ProjectItem';
+import Header from '../Header/Header';
+
 
 class Project extends Component {
     componentDidMount() {
@@ -10,21 +13,15 @@ class Project extends Component {
     }
   // Renders the entire app on the DOM
   render() {
-      console.log(this.props.reduxState)
     return (
-      <div className="App">
-      <ul>
-      {this.props.reduxState.projects.map((item) => (
-         <div><li>{item.name}</li> 
-         <li>{item.description}</li>
-         <li><img src= {item.thumbnail} alt="image not found"/></li>
-         <li><a href={item.website}>Website</a></li>
-         <li><a href={item.github}>Github</a></li>
-         <li>{item.date_completed}</li></div>
-    ))}
-      </ul>
-      </div>
-    );
+    <div>
+    <Header />
+        <div className="App">
+        {this.props.reduxState.projects.map((object) => 
+        <ProjectItem item={object}/>)}
+        </div>
+    </div>
+    )
   }
 }
 
