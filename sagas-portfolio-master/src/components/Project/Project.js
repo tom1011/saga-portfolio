@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Project extends Component {
+    componentDidMount() {
+        this.getPort();
+    }
+    getPort() {
+        this.props.dispatch({ type: 'GET_PORTFOLIO' })
+    }
   // Renders the entire app on the DOM
   render() {
+      console.log(this.props.reduxState)
     return (
       <div className="App">
       <ul>

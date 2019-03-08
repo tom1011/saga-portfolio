@@ -24,6 +24,7 @@ function* getPortInfo(action) {
         url: '/api/profile/port'
       })
       yield put({type: 'SET_PROJECTS', payload: portInfo.data})
+      yield console.log("in get PortInfo", portInfo.data)
     }
     catch (err){
       console.log('in getPortInfo (get)', err)
