@@ -8,7 +8,7 @@ class ProjectItem extends Component {
         <div className="imgleft">
         <img src= {this.props.item.thumbnail} alt="image not found"/>
         </div>
-        <div>{this.props.item.name} <a href={this.props.item.website}>Website</a> <a href={this.props.item.github}>Github</a></div>
+        <div>{this.props.item.name} <a href={this.props.item.website} target="_blank">Website</a> <a target="_blank" href={this.props.item.github}>Github</a></div>
         <div>{this.props.item.description}</div>
       </div>
     );
