@@ -17,9 +17,9 @@ class Project extends Component {
       {this.props.reduxState.projects.map((item) => (
          <div><li>{item.name}</li> 
          <li>{item.description}</li>
-         <li>{item.thumbnail}</li>
-         <li>{item.website}</li>
-         <li>{item.github}</li>
+         <li><img src= {item.thumbnail} alt="image not found"/></li>
+         <li><a href={item.website}>Website</a></li>
+         <li><a href={item.github}>Github</a></li>
          <li>{item.date_completed}</li></div>
     ))}
       </ul>
