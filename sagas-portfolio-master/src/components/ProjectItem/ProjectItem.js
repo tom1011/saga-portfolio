@@ -7,6 +7,7 @@ class ProjectItem extends Component {
         let websiteLink = ''
         let githubLink = ''
         let imgLink = null
+        let completeDate = ''
         if (this.props.item.website === null) {
             // console.log('in if statement of website')
         }
@@ -25,13 +26,18 @@ class ProjectItem extends Component {
         else {
             imgLink = <img src="images/hydrangea.jpeg" alt="image not found" />
         }
+        if (this.props.item.date_completed === null) {
+        }
+        else {
+            completeDate = <div>{this.props.item.date_completed}</div>
+        }
 
         return (
             <div>
                 <div className="imgleft">
                     <p>{imgLink}</p>
                 </div>
-                <div>{this.props.item.name} {websiteLink} {githubLink}</div>
+                <div>{this.props.item.name} {websiteLink} {githubLink} {completeDate}</div>
                 <div>{this.props.item.description}</div>
             </div>
         );
