@@ -16,6 +16,19 @@ import { takeEvery, put } from 'redux-saga/effects'
 function* rootSaga() {
     yield takeEvery('GET_PORTFOLIO', getPortInfo)
     yield takeEvery('REMOVE_PROJECT', deletePort)
+    yield takeEvery('ADD_PORTFOLIO', putPortfolio)
+}
+
+function* putPortfolio (action){
+    try{
+    yield axios.post('/api/profile/', action.payload)
+    yield put({type: 'GET_PORTFOLIO'})
+    yield console.log('in put saga')
+    }
+    catch(error){
+        console.log('put', error)
+    }
+
 }
 
 function* deletePort (action){

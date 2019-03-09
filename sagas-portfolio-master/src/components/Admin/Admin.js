@@ -33,6 +33,19 @@ class Admin extends Component {
                 [name]: event.target.value,
         });
     }
+    onSubmintButton = (event) => {
+        event.preventDefault();
+        console.log(this.state ,"in onsubmit buttton")
+        this.props.dispatch({ type: 'ADD_PORTFOLIO', payload: this.state})
+        this.setState({
+        name: '',
+        date: '',
+        urlWebsite: '',
+        gitHub: '',
+        description: '',
+        image: ''
+        })
+    }
 
   render() {
 
@@ -50,11 +63,12 @@ class Admin extends Component {
             <div>
                 <input placeholder ="URL of website" onChange={this.onChangeInput("urlWebsite")}/>
                 <input placeholder ="gitHub URL" onChange={this.onChangeInput("gitHub")}/>
+                <input placeholder = "img name" onChange={this.onChangeInput("image")}/>
             </div>
             <div>
                 <textarea row="4" cols="50" placeholder="Description of Project" onChange={this.onChangeInput("description")}>
                 </textarea>
-                <button >Submit</button>
+                <button onClick={this.onSubmintButton}>Submit</button>
             </div>
 
             </div>
