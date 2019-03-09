@@ -15,6 +15,17 @@ import { takeEvery, put } from 'redux-saga/effects'
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('GET_PORTFOLIO', getPortInfo)
+    yield takeEvery('REMOVE_PROJECT', deletePort)
+}
+
+function* deletePort (action){
+    try{
+    yield axios.delete( `api/profile/${action.payload}`)
+    yield put({type: 'GET_PORTFOLIO'})
+    yield console.log('in delete saga')
+  } catch(error){
+    console.log('DELETE ', error)
+  }
 }
 
 function* getPortInfo(action) {

@@ -31,7 +31,7 @@ class ProjectItem extends Component {
         else {
             completeDate = <div>{this.props.item.date_completed}</div>
         }
-
+            // end conditional code 
         return (
             <div>
                 <div className="imgleft">
@@ -39,6 +39,7 @@ class ProjectItem extends Component {
                 </div>
                 <div>{this.props.item.name} {websiteLink} {githubLink} {completeDate}</div>
                 <div>{this.props.item.description}</div>
+                <hr></hr>
             </div>
         );
     }
