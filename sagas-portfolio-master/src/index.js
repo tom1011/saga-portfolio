@@ -23,7 +23,7 @@ function* putPortfolio (action){
     try{
     yield axios.post('/api/profile/', action.payload)
     yield put({type: 'GET_PORTFOLIO'})
-    yield console.log('in put saga')
+    yield console.log('in put saga logging action.payload', action.payload)
     }
     catch(error){
         console.log('put', error)
