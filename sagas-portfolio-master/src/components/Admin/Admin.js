@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Admin extends Component {
+    state = {
+        name: '',
+        date: '',
+        urlWebsite: '',
+        gitHub: '',
+        description: '',
+    }
 
     componentDidMount() {
         this.getPort();
@@ -18,6 +25,15 @@ class Admin extends Component {
         this.props.dispatch({type: 'REMOVE_PROJECT', payload: event.target.value})
     }
 
+    onChangeInput = (name) => (event) => {
+        // console.log( "this is the name hoping its name" ,name)
+        // console.log( "this is the triger" , event.target.value)
+        this.setState({
+                ...this.state,
+                [name]: event.target.value,
+        });
+    }
+
   render() {
 
     return (
@@ -25,6 +41,25 @@ class Admin extends Component {
         <div className="Headerclass">
         <h2>Admin page</h2>
         </div>
+        <div>
+            <div>
+            <input  placeholder="name of project" onChange={this.onChangeInput("name")}/>
+            <input type="date" onChange={this.onChangeInput("date")}/>
+            <p>temp hoolding for tags</p>
+            </div>
+            <div>
+                <input placeholder ="URL of website" onChange={this.onChangeInput("urlWebsite")}/>
+                <input placeholder ="gitHub URL" onChange={this.onChangeInput("gitHub")}/>
+            </div>
+            <div>
+                <textarea row="4" cols="50" placeholder="Description of Project" onChange={this.onChangeInput("description")}>
+                </textarea>
+                <button >Submit</button>
+            </div>
+
+            </div>
+        <div>
+            {/* move to new componet at some point/ this is the project map table */}
         <table>
         <tr>
             <th>Name</th>
@@ -35,7 +70,9 @@ class Admin extends Component {
             <td><button key={object.id} value={object.id} onClick={this.deleteButton}>Delete</button></td>
         </tr>)}
         </table>
+        {/* end project table on admin */}
         <button onClick={this.toProjectPage}>To Project Page</button>
+      </div>
       </div>
     );
   }
