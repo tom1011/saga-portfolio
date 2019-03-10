@@ -21,9 +21,10 @@ function* rootSaga() {
 
 function* putPortfolio (action){
     try{
-    yield axios.post('/api/profile/', action.payload)
+    let isAdded = yield axios.post('/api/profile/', action.payload)
     yield put({type: 'GET_PORTFOLIO'})
-    yield console.log('in put saga logging action.payload', action.payload)
+    yield console.log('in put saga logging isAdded', isAdded)
+    yield put({type: 'IS_ADDED', payload: isAdded})
     }
     catch(error){
         console.log('put', error)
@@ -69,6 +70,14 @@ const projects = (state = [], action) => {
     }
 }
 
+const AddedProject = (state = false, action) => {
+    if (action.type === "IS_ADDED" && action.payload.status == 200){
+    return !state;
+    }
+    return state;
+    
+}
+
 // Used to store the project tags (e.g. 'React', 'jQuery', 'Angular', 'Node.js')
 const tags = (state = [], action) => {
     switch (action.type) {
@@ -84,6 +93,7 @@ const storeInstance = createStore(
     combineReducers({
         projects,
         tags,
+        AddedProject,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

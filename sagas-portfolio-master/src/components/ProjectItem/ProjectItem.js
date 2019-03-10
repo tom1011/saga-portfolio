@@ -8,7 +8,7 @@ class ProjectItem extends Component {
         let githubLink = ''
         let imgLink = null
         let completeDate = ''
-        if (this.props.item.website === null || '') {
+        if (this.props.item.website === null || this.props.item.website ==='') {
             // console.log('in if statement of website')
         }
         else {
@@ -16,17 +16,17 @@ class ProjectItem extends Component {
             websiteLink = <a href={this.props.item.website} target="_blank">Website</a>
             // console.log(websiteLink)
         }
-        if (this.props.item.website === null || '') {
+        if (this.props.item.github === null || this.props.item.github === '') {
         }
         else {
             githubLink = <a href={this.props.item.github} target="_blank">Git Hub Repo</a>
         }
-        if (this.props.item.thumbnail === null || '') {
+        if (this.props.item.thumbnail === null || this.props.item.thumbnail === '') {
         }
         else {
             imgLink = <img src="images/hydrangea.jpeg" alt="image not found" />
         }
-        if (this.props.item.date_completed === null || '') {
+        if (this.props.item.date_completed === null || this.props.item.date_completed === '') {
         }
         else {
             completeDate = <div>{this.props.item.date_completed}</div>

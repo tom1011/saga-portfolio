@@ -8,10 +8,12 @@ class Admin extends Component {
         urlWebsite: null,
         gitHub: null,
         description: null,
+        image: null
     }
 
     componentDidMount() {
         this.getPort();
+        this.clearInputs();
     }
     getPort=()=> {
         this.props.dispatch({ type: 'GET_PORTFOLIO' })
@@ -25,6 +27,7 @@ class Admin extends Component {
         this.props.dispatch({type: 'REMOVE_PROJECT', payload: event.target.value})
     }
 
+
     onChangeInput = (name) => (event) => {
         // console.log( "this is the name hoping its name" ,name)
         // console.log( "this is the triger" , event.target.value)
@@ -33,25 +36,39 @@ class Admin extends Component {
                 [name]: event.target.value,
         });
     }
+    clearInputs = () => {
+        this.setState({
+            ...this.state,
+            name: null,
+            date: null,
+            urlWebsite: null,
+            gitHub: null,
+            description: null,
+            image: null,
+            })
+    }
     onSubmintButton = (event) => {
-        event.preventDefault();
+        // note I have to reload page or else the clear dosent work.
+        // idk why seting value to null will not reset the input fields
+        // but it dose so I ended up doing this work around.
         console.log(this.state ,"in onsubmit buttton")
         this.props.dispatch({ type: 'ADD_PORTFOLIO', payload: this.state})
         this.setState({
-        name: null,
-        date: null,
-        urlWebsite: null,
-        gitHub: null,
-        description: null,
-        image: null,
-        })
+            ...this.state,
+            name: '',
+            date: '',
+            urlWebsite: '',
+            gitHub: '',
+            description: '',
+            image: '',
+            })
         console.log("logging state after clear in post", this.state)
     }
 
   render() {
-
     return (
       <div>
+          
         <div className="Headerclass">
         <h2>Admin page</h2>
         </div>
