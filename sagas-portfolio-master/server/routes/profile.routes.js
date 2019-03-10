@@ -13,6 +13,16 @@ router.get('/port', (req, res) => {
       });
   });
 
+  router.get('/tags', (req, res) => {
+    const queryText = `SELECT "name" FROM "tags";`
+    pool.query(queryText)
+      .then((result) => { res.send(result.rows); })
+      .catch((err) => {
+        console.log('Error completing SELECT port query', err);
+        res.sendStatus(500);
+      });
+  });
+
 
   router.delete('/:id', (req, res) => {
       console.log('in delete')

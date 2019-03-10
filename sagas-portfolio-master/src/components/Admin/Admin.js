@@ -8,7 +8,8 @@ class Admin extends Component {
         urlWebsite: null,
         gitHub: null,
         description: null,
-        image: null
+        image: null,
+        tag: null,
     }
 
     componentDidMount() {
@@ -45,13 +46,14 @@ class Admin extends Component {
             gitHub: null,
             description: null,
             image: null,
+            tag: null,
             })
     }
     onSubmintButton = (event) => {
         // note I have to reload page or else the clear dosent work.
         // idk why seting value to null will not reset the input fields
         // but it dose so I ended up doing this work around.
-        console.log(this.state ,"in onsubmit buttton")
+        // console.log(this.state ,"in onsubmit buttton")
         this.props.dispatch({ type: 'ADD_PORTFOLIO', payload: this.state})
         this.setState({
             ...this.state,
@@ -61,13 +63,14 @@ class Admin extends Component {
             gitHub: '',
             description: '',
             image: '',
+            tag: '',
             })
         console.log("logging state after clear in post", this.state)
     }
 
   render() {
       if (this.props.reduxState.addedProject){
-      console.log("in conditional rendering of this.props.reduxState.addedProject" ,this.props.reduxState.addedProject)
+    //   console.log("in conditional rendering of this.props.reduxState.addedProject" ,this.props.reduxState.addedProject)
         alert("Project Added")
         this.props.dispatch({ type: 'IS_ADDED'})
       }
@@ -81,7 +84,9 @@ class Admin extends Component {
             <div>
             <input  placeholder="name of project" onChange={this.onChangeInput("name")} value={this.state.name}/>
             <input type="date" onChange={this.onChangeInput("date")} value={this.state.date}/>
-            <p>temp hoolding for tags</p>
+            <select name="tag" onChange={this.onChangeInput("tag")}>
+            {this.props.reduxState.tags.map((object) => <option value={object.name}>{object.name}</option>)}
+            </select>
             </div>
             <div>
                 <input placeholder ="URL of website"  onChange={this.onChangeInput("urlWebsite")}value={this.state.urlWebsite}/>
