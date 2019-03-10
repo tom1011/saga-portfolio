@@ -9,7 +9,7 @@ class Admin extends Component {
         gitHub: null,
         description: null,
         image: null,
-        tag: null,
+        tag: 1,
     }
 
     componentDidMount() {
@@ -30,8 +30,8 @@ class Admin extends Component {
 
 
     onChangeInput = (name) => (event) => {
-        // console.log( "this is the name hoping its name" ,name)
-        // console.log( "this is the triger" , event.target.value)
+        console.log( "this is the name hoping its name" ,name)
+        console.log( "this is the triger" , event.target.value)
         this.setState({
                 ...this.state,
                 [name]: event.target.value,
@@ -46,7 +46,6 @@ class Admin extends Component {
             gitHub: null,
             description: null,
             image: null,
-            tag: null,
             })
     }
     onSubmintButton = (event) => {
@@ -63,7 +62,6 @@ class Admin extends Component {
             gitHub: '',
             description: '',
             image: '',
-            tag: '',
             })
         console.log("logging state after clear in post", this.state)
     }
@@ -85,7 +83,7 @@ class Admin extends Component {
             <input  placeholder="name of project" onChange={this.onChangeInput("name")} value={this.state.name}/>
             <input type="date" onChange={this.onChangeInput("date")} value={this.state.date}/>
             <select name="tag" onChange={this.onChangeInput("tag")}>
-            {this.props.reduxState.tags.map((object) => <option value={object.name}>{object.name}</option>)}
+            {this.props.reduxState.tags.map((object) => <option value={object.id}>{object.name}</option>)}
             </select>
             </div>
             <div>

@@ -37,7 +37,7 @@ class ProjectItem extends Component {
                 <div className="imgleft">
                     <p>{imgLink}</p>
                 </div>
-                <div>{this.props.item.name} {websiteLink} {githubLink} {completeDate}</div>
+                <div>{this.props.item.name} {websiteLink} {githubLink} {this.props.item.tagsName} {completeDate} </div>
                 <div>{this.props.item.description}</div>
                 <hr></hr>
             </div>

@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/port', (req, res) => {
-    const queryText = `SELECT "projects"."id", "projects"."name", "projects"."description", "projects"."thumbnail", "projects"."website", "projects"."github", "projects"."date_completed" FROM "projects";`
+    const queryText = `SELECT "projects"."id", "projects"."name", "projects"."description", "projects"."thumbnail", "projects"."website", "projects"."github", "projects"."date_completed", "tags"."name" as "tagsName" FROM "projects" JOIN "tags" ON "tags"."id" = "projects"."tag_id";`
     pool.query(queryText)
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
@@ -14,7 +14,7 @@ router.get('/port', (req, res) => {
   });
 
   router.get('/tags', (req, res) => {
-    const queryText = `SELECT "name" FROM "tags";`
+    const queryText = `SELECT "id", "name" FROM "tags";`
     pool.query(queryText)
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
@@ -42,15 +42,17 @@ router.get('/port', (req, res) => {
       "thumbnail", 
       "website", 
       "github", 
-      "date_completed" ) 
-      VALUES ($1, $2, $3, $4, $5, $6)`
+      "date_completed",
+      "tag_id" ) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7)`
       const queryValues = [
         updatedport.name,
         updatedport.description,
         updatedport.image,
         updatedport.urlWebsite,
         updatedport.gitHub,
-        updatedport.date,];
+        updatedport.date,
+        updatedport.tag];
         pool.query(queryText, queryValues)
         .then(() => { res.sendStatus(200); })
         .catch((err) => {
