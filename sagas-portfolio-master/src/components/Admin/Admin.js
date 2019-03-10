@@ -66,6 +66,11 @@ class Admin extends Component {
     }
 
   render() {
+      if (this.props.reduxState.addedProject){
+      console.log("in conditional rendering of this.props.reduxState.addedProject" ,this.props.reduxState.addedProject)
+        alert("Project Added")
+        this.props.dispatch({ type: 'IS_ADDED'})
+      }
     return (
       <div>
           
@@ -109,6 +114,7 @@ class Admin extends Component {
     );
   }
 }
+
 const mapStateToProps = (reduxState) => ({
     reduxState
 });

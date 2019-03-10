@@ -70,12 +70,12 @@ const projects = (state = [], action) => {
     }
 }
 
-const AddedProject = (state = false, action) => {
-    if (action.type === "IS_ADDED" && action.payload.status == 200){
+const addedProject = (state = false, action) => {
+    console.log("in added project")
+    if (action.type === "IS_ADDED"){
     return !state;
     }
     return state;
-    
 }
 
 // Used to store the project tags (e.g. 'React', 'jQuery', 'Angular', 'Node.js')
@@ -93,7 +93,7 @@ const storeInstance = createStore(
     combineReducers({
         projects,
         tags,
-        AddedProject,
+        addedProject,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
